@@ -136,15 +136,24 @@ Ejercicios
   continuación, una captura de `wavesurfer` en la que se vea con claridad la señal temporal, el contorno de
   potencia y la tasa de cruces por cero, junto con el etiquetado manual de los segmentos.
 
+<img width="1440" alt="Captura de pantalla 2023-10-20 a las 10 08 06" src="https://github.com/nareshmarques/P2/assets/118903051/4d6e12f4-644f-4e23-bd6e-5d457c3e8aeb">
 
 - A la vista de la gráfica, indique qué valores considera adecuados para las magnitudes siguientes:
 
 	* Incremento del nivel potencia en dB, respecto al nivel correspondiente al silencio inicial, para
 	  estar seguros de que un segmento de señal se corresponde con voz.
 
+	  Podemos estar seguros de que un segmento de señal corresponde con la voz si incrementamos el nivel de potencia entre 20dB y 		  30dB.
+
 	* Duración mínima razonable de los segmentos de voz y silencio.
 
+	  Para poder determinar que un tramo de la señal de audio se corresponde con un silencio tomamos una duración mínima de Silence 	  Time = 100ms. En el caso de la voz, el tramo debe tener una duración mínima Voice Time = 250ms.
+
 	* ¿Es capaz de sacar alguna conclusión a partir de la evolución de la tasa de cruces por cero?
+
+	  Mediante la tasa de cruces por cero somos capaces de ver en ciertos casos cuando la señal de voz se trata de un silencio o un 	  segmento de voz, aunque no da resultados demasiado fiables si se mira el archivo de audio completo. Para ello es mucho más 		  eficaz fijarse en la potencia de la señal.
+
+   	  por otro lado, la tasa de cruces por cero nos es útil para distinguir los sonidos sordos de los sonoros, ya que los sonidos 		  sordos tienen un número mucho mayor de cruces por cero que los sonidos sonoros.
 
 
 ### Desarrollo del detector de actividad vocal
