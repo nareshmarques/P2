@@ -33,17 +33,11 @@ typedef struct {
  */
 
 Features compute_features(const float *x, int N) {
-  /*
-   * Input: x[i] : i=0 .... N-1 
-   * Ouput: computed features
-   */
-  /* 
-   * DELETE and include a call to your own functions
-   *
-   * For the moment, compute random value between 0 and 1 
-   */
+  
   Features feat;
+  feat.zcr = compute_zcr(x, N, 16000); // vad_data->sampling_rate
   feat.p = compute_power(x, N);
+  feat.am = compute_am(x, N);
   return feat;
 }
 
@@ -51,12 +45,19 @@ Features compute_features(const float *x, int N) {
  * TODO: Init the values of vad_data
  */
 
-VAD_DATA * vad_open(float rate, float umbral1) {
+VAD_DATA * vad_open(float rate, int alfa_1, int alfa_2, int count_ms, int count_mv) {
   VAD_DATA *vad_data = malloc(sizeof(VAD_DATA));
   vad_data->state = ST_INIT;
+  vad_data->lastState = ST_UNDEF;
   vad_data->sampling_rate = rate;
   vad_data->frame_length = rate * FRAME_TIME * 1e-3;
-  vad_data->umbral1 = umbral1;
+  vad_data->alfa_1 = alfa_1;
+  vad_data->alfa_2 = alfa_2;
+  vad_data->count_ms = count_ms;
+  vad_data->count_mv = count_mv;
+  vad_data->count_initFrames = 7;  
+  vad_data->count_undefined = 0;
+  vad_data->count_initial = 0;
   return vad_data;
 }
 
@@ -90,31 +91,72 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
   vad_data->last_feature = f.p; /* save feature, in case you want to show */
 
   switch (vad_data->state) {
-  case ST_INIT:
-    vad_data->umbral1 = f.p + vad_data->umbral1;
-    vad_data->state = ST_SILENCE;
-    break;
+    case ST_INIT: if(vad_data->count_initial < vad_data->count_initFrames){
+                    vad_data->count_initial = vad_data->count_initial + 1;
+                    vad_data->zcr0 = vad_data->zcr0 + f.zcr;
+                    vad_data->p0 = vad_data->p0 + pow(10, f.p/10);
+                  } else{
+                    vad_data->zcr0 = (vad_data->zcr0) / vad_data->count_initial;
+                    vad_data->p0 = 10*log10((vad_data->p0) / vad_data->count_initFrames);
+                    vad_data->k1 = vad_data->p0 + vad_data->alfa_1;
+                    vad_data->k2 = vad_data->k1 + vad_data->alfa_2;
+                    vad_data->state = ST_SILENCE;
+                  }
+                  vad_data->lastState = ST_INIT;
+                  break;
 
-  case ST_SILENCE:
-    if (f.p > vad_data->umbral1)
-      vad_data->state = ST_VOICE;
-    break;
+    case ST_SILENCE:  vad_data->count_undefined = 1;
+                      if(f.p > vad_data->k1){
+                        vad_data->state = ST_MAYBEVOICE;
+                      } else{
+                        vad_data->state = ST_SILENCE;
+                      }
+                      vad_data->lastState = ST_SILENCE;
+                      break;
 
-  case ST_VOICE:
-    if (f.p < vad_data->umbral1)
-      vad_data->state = ST_SILENCE;
-    break;
+    case ST_VOICE:  vad_data->count_undefined = 1;
+                    if((f.p < vad_data->k1)){ // (f.p < vad_data->k1) && (f.zcr < vad_data->zcr0)
+                      vad_data->state = ST_MAYBESILENCE;
+                    }
+                    vad_data->lastState = ST_VOICE;
+                    break;
 
-  case ST_UNDEF:
-    break;
+    case ST_MAYBESILENCE: vad_data->count_undefined = vad_data->count_undefined + 1;
+                          if(f.p < vad_data->p0){ // P0 o k1????
+                            vad_data->state = ST_SILENCE;
+                          }
+                          if(f.p > vad_data->k2){
+                            vad_data->state = ST_VOICE;
+                          }
+                          if((vad_data->count_undefined > vad_data->count_ms)){ // (f.p > vad_data->k1) && (vad_data->count_undefined > vad_data->count_ms)
+                            vad_data->state = ST_SILENCE;
+                          }
+                          vad_data->lastState = ST_MAYBESILENCE;
+                          break;
+
+    case ST_MAYBEVOICE: vad_data->count_undefined = vad_data->count_undefined + 1;
+                        if(f.p > vad_data->k2){
+                          vad_data->state = ST_VOICE;
+                        }
+                        if((vad_data->count_undefined > vad_data->count_mv)){ // (f.p > vad_data->k1) && (vad_data->count_undefined > vad_data->count_mv)
+                          vad_data->state = ST_VOICE;
+                        }
+                        if(f.p < vad_data->k1){
+                          vad_data->state = ST_SILENCE;
+                        }
+                        vad_data->lastState = ST_MAYBEVOICE;
+                        break;
+
+    case ST_UNDEF:  break;
   }
-
-  if (vad_data->state == ST_SILENCE ||
-      vad_data->state == ST_VOICE)
+  
+  if (vad_data->state == ST_SILENCE || vad_data->state == ST_VOICE){
     return vad_data->state;
-  else
+  } else{
     return ST_UNDEF;
+  }
 }
+
 
 void vad_show_state(const VAD_DATA *vad_data, FILE *out) {
   fprintf(out, "%d\t%f\n", vad_data->state, vad_data->last_feature);

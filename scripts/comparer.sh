@@ -1,4 +1,6 @@
-for umbral1 in $(seq 4 0.1 6); do
-    printf "%.1f\t" $umbral1
-    scripts/run_vad.sh $umbral1 | fgrep TOTAL
+for alfa_1 in $(seq 10 1 20); do
+echo -ne "$alfa_1\t"
+scripts/run_vad.sh $alfa_1 | fgrep TOTAL; 
 done | sort -t: -k2n
+
+
