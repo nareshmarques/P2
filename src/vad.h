@@ -13,7 +13,7 @@ const char *state2str(VAD_STATE st);
 typedef struct {
   VAD_STATE state, lastState;
   float sampling_rate, p0, zcr0, k1, k2;
-  int alfa_1, alfa_2, count_initFrames, count_ms, count_mv, count_init, count_undefined, count_initial;
+  int  alfa_1, alfa_2, count_initFrames, count_ms, count_mv, count_init, count_undefined, count_initial;
   unsigned int frame_length;
   float last_feature; /* for debuggin purposes */
 } VAD_DATA;

@@ -115,20 +115,20 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
                       break;
 
     case ST_VOICE:  vad_data->count_undefined = 1;
-                    if((f.p < vad_data->k1)){ // (f.p < vad_data->k1) && (f.zcr < vad_data->zcr0)
+                    if((f.p < vad_data->k1) && (f.zcr < vad_data->zcr0)){ // (f.p < vad_data->k1) && (f.zcr < vad_data->zcr0)
                       vad_data->state = ST_MAYBESILENCE;
                     }
                     vad_data->lastState = ST_VOICE;
                     break;
 
     case ST_MAYBESILENCE: vad_data->count_undefined = vad_data->count_undefined + 1;
-                          if(f.p < vad_data->k1){ // P0 o k1????
+                          if(f.p < vad_data->p0){ // P0 o k1????
                             vad_data->state = ST_SILENCE;
                           }
                           if(f.p > vad_data->k2){
                             vad_data->state = ST_VOICE;
                           }
-                          if((vad_data->count_undefined > vad_data->count_ms)){ // (f.p > vad_data->k1) && (vad_data->count_undefined > vad_data->count_ms)
+                          if((f.p > vad_data->k1) && (vad_data->count_undefined > vad_data->count_ms)){ // (f.p > vad_data->k1) && (vad_data->count_undefined > vad_data->count_ms)
                             vad_data->state = ST_SILENCE;
                           }
                           vad_data->lastState = ST_MAYBESILENCE;
@@ -138,7 +138,7 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
                         if(f.p > vad_data->k2){
                           vad_data->state = ST_VOICE;
                         }
-                        if((vad_data->count_undefined > vad_data->count_mv)){ // (f.p > vad_data->k1) && (vad_data->count_undefined > vad_data->count_mv)
+                        if((f.p > vad_data->k1) && (vad_data->count_undefined > vad_data->count_mv)){ // (f.p > vad_data->k1) && (vad_data->count_undefined > vad_data->count_mv)
                           vad_data->state = ST_VOICE;
                         }
                         if(f.p < vad_data->k1){
