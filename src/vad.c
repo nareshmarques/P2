@@ -122,7 +122,7 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
                     break;
 
     case ST_MAYBESILENCE: vad_data->count_undefined = vad_data->count_undefined + 1;
-                          if(f.p < vad_data->p0){ // P0 o k1????
+                          if(f.p < vad_data->k1){ // P0 o k1????
                             vad_data->state = ST_SILENCE;
                           }
                           if(f.p > vad_data->k2){
