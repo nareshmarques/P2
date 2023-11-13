@@ -17,7 +17,8 @@ int main(int argc, char *argv[]) {
   FILE *vadfile;
   int n_read = 0, i;
   // int n_write = 0;
-  int alfa_1, alfa_2, count_ms, count_mv;
+  int count_ms, count_mv;
+  float alfa_1, alfa_2;
 
   VAD_DATA *vad_data;
   VAD_STATE state, last_state;
@@ -35,8 +36,8 @@ int main(int argc, char *argv[]) {
   input_wav  = args.input_wav;
   output_vad = args.output_vad;
   output_wav = args.output_wav;
-  alfa_1 = atoi(args.alfa_1);
-  alfa_2 = atoi(args.alfa_2);
+  alfa_1 = atof(args.alfa_1);
+  alfa_2 = atof(args.alfa_2);
   count_ms = atoi(args.count_ms);
   count_mv = atoi(args.count_mv);
 
