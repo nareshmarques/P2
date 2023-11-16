@@ -9,10 +9,10 @@ Options:
    -i FILE, --input-wav=FILE        WAVE file for voice activity detection
    -o FILE, --output-vad=FILE       Label file with the result of VAD
    -w FILE, --output-wav=FILE       WAVE file with silences cleared
-   -1 FLOAT, --alfa_1=FLOAT         Margin for k1 [default: 2.1]
-   -2 FLOAT, --alfa_2=FLOAT         Margin for k2 [default: 6]
-   -s INT, --count_ms=INT           Maybe Silence (MS) frame counter [default: 15]
-   -m INT, --count_mv=INT           Maybe Voice (MV) frame counter [default: 5]
+   -1 FLOAT, --alfa_1=FLOAT         Margin for k1 [default: 2.9]
+   -2 FLOAT, --alfa_2=FLOAT         Margin for k2 [default: 6.025]
+   -s INT, --count_ms=INT           Maybe Silence (MS) frame counter [default: 8]
+   -m INT, --count_mv=INT           Maybe Voice (MV) frame counter [default: 13]
    -v, --verbose                    Show debug information
    -h, --help                       Show this screen
    --version                        Show the version of the project

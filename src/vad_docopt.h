@@ -40,10 +40,10 @@ const char help_message[] =
 "   -i FILE, --input-wav=FILE        WAVE file for voice activity detection\n"
 "   -o FILE, --output-vad=FILE       Label file with the result of VAD\n"
 "   -w FILE, --output-wav=FILE       WAVE file with silences cleared\n"
-"   -1 FLOAT, --alfa_1=FLOAT         Margin for k1 [default: 2.1]\n"
-"   -2 FLOAT, --alfa_2=FLOAT         Margin for k2 [default: 6]\n"
-"   -s INT, --count_ms=INT           Maybe Silence (MS) frame counter [default: 15]\n"
-"   -m INT, --count_mv=INT           Maybe Voice (MV) frame counter [default: 5]\n"
+"   -1 FLOAT, --alfa_1=FLOAT         Margin for k1 [default: 2.9]\n"
+"   -2 FLOAT, --alfa_2=FLOAT         Margin for k2 [default: 6.025]\n"
+"   -s INT, --count_ms=INT           Maybe Silence (MS) frame counter [default: 8]\n"
+"   -m INT, --count_mv=INT           Maybe Voice (MV) frame counter [default: 13]\n"
 "   -v, --verbose                    Show debug information\n"
 "   -h, --help                       Show this screen\n"
 "   --version                        Show the version of the project\n"
@@ -319,8 +319,8 @@ int elems_to_args(Elements *elements, DocoptArgs *args, bool help,
 
 DocoptArgs docopt(int argc, char *argv[], bool help, const char *version) {
     DocoptArgs args = {
-        0, 0, 0, (char*) "2.1", (char*) "6", (char*) "15", (char*) "5", NULL,
-        NULL, NULL,
+        0, 0, 0, (char*) "2.9", (char*) "6.025", (char*) "8", (char*) "13",
+        NULL, NULL, NULL,
         usage_pattern, help_message
     };
     Tokens ts;

@@ -1,9 +1,9 @@
 #!/bin/bash
 
-alfa_1=${1:-2.9}
-alfa_2=${2:-6.025}
-count_ms=${3:-8}
-count_mv=${4:-13}
+alfa_1=${1:-4}
+alfa_2=${2:-5.6}
+count_ms=${3:-10}
+count_mv=${4:-8}
 
 
 # Be sure that this file has execution permissions:

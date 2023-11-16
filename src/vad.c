@@ -105,7 +105,7 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
                   vad_data->lastState = ST_INIT;
                   break;
 
-    case ST_SILENCE:  vad_data->count_undefined = 1;
+    case ST_SILENCE:  vad_data->count_undefined = 0;
                       if(f.p > vad_data->k1){
                         vad_data->state = ST_MAYBEVOICE;
                       } else{
@@ -114,7 +114,7 @@ VAD_STATE vad(VAD_DATA *vad_data, float *x) {
                       vad_data->lastState = ST_SILENCE;
                       break;
 
-    case ST_VOICE:  vad_data->count_undefined = 1;
+    case ST_VOICE:  vad_data->count_undefined = 0;
                     if((f.p < vad_data->k1) && (f.zcr < vad_data->zcr0)){ // (f.p < vad_data->k1) && (f.zcr < vad_data->zcr0)
                       vad_data->state = ST_MAYBESILENCE;
                     }
