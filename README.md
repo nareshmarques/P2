@@ -176,9 +176,7 @@ Ejercicios
   automática conseguida para el fichero grabado al efecto. 
 
 ![WhatsApp Image 2023-11-19 at 21 15 43](https://github.com/nareshmarques/P2/assets/84085478/dd80a627-d70e-417c-8bb2-4a1695eba23d)
-
-	Detección automática, etiquetado manual y señal temporal, de arriba a abajo
-
+	*Detección automática, etiquetado manual y señal temporal, de arriba a abajo*
 - Explique, si existen. las discrepancias entre el etiquetado manual y la detección automática.
 
 - Evalúe los resultados sobre la base de datos `db.v4` con el script `vad_evaluation.pl` e inserte a 
