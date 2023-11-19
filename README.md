@@ -179,6 +179,8 @@ Ejercicios
 	*Detección automática, etiquetado manual y señal temporal, de arriba a abajo*
 - Explique, si existen. las discrepancias entre el etiquetado manual y la detección automática.
 
+  	Las discrepancias observadas en el momento de una permutación de estado entre voz y señal vienen dadas por la 		sensibilidad que el sistema obtiene del algoritmo y la elección de los umbrales. Así, podemos ver como en algun 	caso el cambio se produce en un instante diferente, o en ciertos momentos no se produce en ciertos instantes de 	silencio, debido al uso de estados intermedios para el cambio entre voz y silencio.
+
 - Evalúe los resultados sobre la base de datos `db.v4` con el script `vad_evaluation.pl` e inserte a 
   continuación las tasas de sensibilidad (*recall*) y precisión para el conjunto de la base de datos (sólo
   el resumen).
