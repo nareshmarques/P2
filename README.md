@@ -161,6 +161,17 @@ Ejercicios
 - Complete el código de los ficheros de la práctica para implementar un detector de actividad vocal en
   tiempo real tan exacto como sea posible. Tome como objetivo la maximización de la puntuación-F `TOTAL`.
 
+	Mediante el uso de los umbrales 'alfa_1' y 'alfa_2' en el código del detector de actividad vocal buscamos 		determinar los estados de voz y silencio. Estos umbrales se utilizan para definir límites en las características 	extraídas (especialmente en la potencia p) para la transición entre diferentes estados. Posteriormente a sus 		deficinición, se busca ajustarlos para mejorar la precisión de la detección.
+
+	Cálculo de los umbrales k1 y k2: 
+	* k1 se calcula sumando alfa_1 a la potencia media inicial (p0), obtenida durante el estado de inicialización 		(ST_INIT).
+	*k2 se calcula sumando alfa_2 a k1.
+	Estos umbrales ayudan a establecer niveles de decisión para clasificar si una señal es voz o silencio.
+
+	El autómata maneja varios estados: ST_INIT (inicialización), ST_SILENCE (silencio), ST_VOICE (voz), 			ST_MAYBESILENCE, ST_MAYBEVOICE, y ST_UNDEF. Las transiciones entre estos estados dependen de las características de 	la señal y de los umbrales definidos.
+
+	Este código implementa un enfoque de detección de actividad vocal basado en características de señal y autómata 	finito, logrando una robustez plasmada en su  F-score de 92.354%
+
 - Inserte una gráfica en la que se vea con claridad la señal temporal, el etiquetado manual y la detección
   automática conseguida para el fichero grabado al efecto. 
 
