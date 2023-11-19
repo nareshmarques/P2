@@ -165,7 +165,7 @@ Ejercicios
 
 	Cálculo de los umbrales k1 y k2: 
 	* k1 se calcula sumando alfa_1 a la potencia media inicial (p0), obtenida durante el estado de inicialización 		(ST_INIT).
-	*k2 se calcula sumando alfa_2 a k1.
+	* k2 se calcula sumando alfa_2 a k1.
 	Estos umbrales ayudan a establecer niveles de decisión para clasificar si una señal es voz o silencio.
 
 	El autómata maneja varios estados: ST_INIT (inicialización), ST_SILENCE (silencio), ST_VOICE (voz), 			ST_MAYBESILENCE, ST_MAYBEVOICE, y ST_UNDEF. Las transiciones entre estos estados dependen de las características de 	la señal y de los umbrales definidos.
