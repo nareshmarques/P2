@@ -177,6 +177,7 @@ Ejercicios
 
 ![WhatsApp Image 2023-11-19 at 21 15 43](https://github.com/nareshmarques/P2/assets/84085478/dd80a627-d70e-417c-8bb2-4a1695eba23d)
 
+	_Detección automática, etiquetado manual y señal temporal, de arriba a abajo._
 
 - Explique, si existen. las discrepancias entre el etiquetado manual y la detección automática.
 
@@ -184,7 +185,8 @@ Ejercicios
   continuación las tasas de sensibilidad (*recall*) y precisión para el conjunto de la base de datos (sólo
   el resumen).
 
-  <img width="653" alt="Captura de pantalla 2023-11-19 203525" src="https://github.com/nareshmarques/P2/assets/84085478/6c4ab0a1-fe4a-4ca0-9151-2cfce40a3f8a">
+  <img width="658" alt="Captura de pantalla 2023-11-19 222011" src="https://github.com/nareshmarques/P2/assets/84085478/10238cee-0832-4e9d-b796-e825b16f0561">
+
 
 
 
