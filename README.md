@@ -170,7 +170,7 @@ Ejercicios
 
 	El autómata maneja varios estados: ST_INIT (inicialización), ST_SILENCE (silencio), ST_VOICE (voz), 			ST_MAYBESILENCE, ST_MAYBEVOICE, y ST_UNDEF. Las transiciones entre estos estados dependen de las características de 	la señal y de los umbrales definidos.
 
-	Este código implementa un enfoque de detección de actividad vocal basado en características de señal y autómata 	finito, logrando una robustez plasmada en su  F-score de 92.354%
+	Este código implementa un enfoque de detección de actividad vocal basado en características de señal y autómata 	finito, logrando una robustez plasmada en su  F-score de 92.576%
 
 - Inserte una gráfica en la que se vea con claridad la señal temporal, el etiquetado manual y la detección
   automática conseguida para el fichero grabado al efecto. 
@@ -184,8 +184,7 @@ Ejercicios
 - Evalúe los resultados sobre la base de datos `db.v4` con el script `vad_evaluation.pl` e inserte a 
   continuación las tasas de sensibilidad (*recall*) y precisión para el conjunto de la base de datos (sólo
   el resumen).
-
-  <img width="658" alt="Captura de pantalla 2023-11-19 222011" src="https://github.com/nareshmarques/P2/assets/84085478/10238cee-0832-4e9d-b796-e825b16f0561">
+<img width="651" alt="Captura de pantalla 2023-11-20 164616" src="https://github.com/nareshmarques/P2/assets/84085478/286236ac-b026-4ff3-a93b-9c276ddc2ed7">
 
 
 
