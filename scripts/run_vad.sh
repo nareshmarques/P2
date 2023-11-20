@@ -1,9 +1,9 @@
 #!/bin/bash
 
-alfa_1=${1:-4}
-alfa_2=${2:-5.6}
-count_ms=${3:-10}
-count_mv=${4:-8}
+alfa_1=${1:-3.51}
+alfa_2=${2:-6}
+count_ms=${3:-7}
+count_mv=${4:-36}
 
 
 # Be sure that this file has execution permissions:
@@ -16,7 +16,7 @@ set -o pipefail
 # Write here the name and path of your program and database
 DIR_P2=$HOME/PAV/P2
 DB=$DIR_P2/db.v4
-CMD="$DIR_P2/bin/vad -1 $alfa_1 -2 $alfa_2"
+CMD="$DIR_P2/bin/vad -1 $alfa_1 -2 $alfa_2 -s $count_ms -m $count_mv" 
 
 for filewav in $DB/*/*wav; do
 #    echo
